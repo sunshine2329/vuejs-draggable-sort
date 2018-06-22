@@ -4,22 +4,20 @@
       <b-button v-on:click.prevent="onBack" style="width: auto;">Back</b-button>
       <b-button v-on:click.prevent="onDone" style="float: right; width: auto;">Done</b-button>
     </div>
-    <div style="overflow-y: hidden;">
-      <div id="scroll-container" class="d-flex">
-        <draggable v-model="sortedPhrases"
-          :options="options"
-          style="width: 100%">
-          <transition-group>
-              <div v-for="phrase in sortedPhrases" v-bind:key="`phrase-${phrase.index}`" class="d-flex">
-                <div class="phrase-row phrase-row-number d-flex justify-content-center align-content-center">{{ phrase.index }}.</div>
-                <div class="phrase-row d-flex justify-content-center align-items-center">
-                  <div style="flex: 1">{{ phrase.phrase }}</div>
-                  <i class="handle"><v-icon name="move"></v-icon></i>
-                </div>
+    <div id="scroll-container" class="d-flex">
+      <draggable v-model="sortedPhrases"
+        :options="options"
+        style="width: 100%">
+        <transition-group>
+            <div v-for="phrase in sortedPhrases" v-bind:key="`phrase-${phrase.index}`" class="d-flex">
+              <div class="phrase-row phrase-row-number d-flex justify-content-center align-content-center">{{ phrase.index }}.</div>
+              <div class="phrase-row d-flex justify-content-center align-items-center">
+                <div style="flex: 1">{{ phrase.phrase }}</div>
+                <i class="handle"><v-icon name="move"></v-icon></i>
               </div>
-          </transition-group>
-        </draggable>
-      </div>
+            </div>
+        </transition-group>
+      </draggable>
     </div>
   </div>
 </template>
@@ -77,7 +75,6 @@ export default {
   bottom: 0px;
   overflow-y: auto;
   -webkit-overflow-scrolling: auto;
-  height: 100%;
 }
 .sortable-chosen {
   opacity: 0.3 !important;
