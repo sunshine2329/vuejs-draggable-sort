@@ -6,6 +6,7 @@
   <div v-if="!sortedResults" style="height: 100%">
     <start-sort v-on:onStart="onStart" v-if="status === 'none'"></start-sort>
     <draggable-sort-phrases v-bind:phrases="phrases" v-on:onEnd="onEnd($event)" v-on:initialize="initialize" v-if="status === 'started'"></draggable-sort-phrases>
+    <!-- <draggable-sort v-if="status === 'started'"></draggable-sort> -->
   </div>
 </div>
 </template>
@@ -66,6 +67,6 @@ export default {
 
 <style scoped>
 #sort-phrases {
-  height: 100%
+  height: 100%;
 }
 </style>
