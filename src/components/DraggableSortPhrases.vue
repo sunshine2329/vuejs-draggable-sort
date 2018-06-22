@@ -4,8 +4,8 @@
       <b-button v-on:click.prevent="onBack" style="width: auto;">Back</b-button>
       <b-button v-on:click.prevent="onDone" style="float: right; width: auto;">Done</b-button>
     </div>
-    <div id="scroll-container" class="d-flex">
-      <draggable v-model="sortedPhrases" :options="options" style="width: 100%">
+    <div ref="scrollContainer" id="scroll-container" class="d-flex">
+      <draggable id="draggable-container" v-model="sortedPhrases" :options="options" style="width: 100%">
         <transition-group>
             <div v-for="phrase in sortedPhrases" v-bind:key="`phrase-${phrase.index}`" class="d-flex">
               <div class="phrase-row phrase-row-number d-flex justify-content-center align-content-center">{{ phrase.index }}.</div>
@@ -38,7 +38,20 @@ export default {
       options: {
         handle: '.handle',
         scroll: true,
-        group: {name: 'Phrases', pull: false, put: true}
+        group: {name: 'Phrases', pull: false, put: true},
+        scrollFn: function (offsetX, offsetY, originalEvent, touchEvt, hoverTagetEl) {
+          const scrollContainerHeight = document.getElementById('scroll-container').offsetHeight
+          const scrollHeight = document.getElementById('draggable-container').scrollHeight
+          var scrollTop = document.getElementById('scroll-container').scrollTop
+          const maxTop = scrollHeight - scrollContainerHeight
+          if (originalEvent.clientY < 120 && scrollTop > 0) {
+            scrollTop -= 10
+            document.getElementById('scroll-container').scrollTop = scrollTop > 0 ? scrollTop : 0
+          } else if (originalEvent.clientY > scrollContainerHeight - 100 && scrollTop < maxTop) {
+            scrollTop += 10
+            document.getElementById('scroll-container').scrollTop = scrollTop < maxTop ? scrollTop : maxTop
+          }
+        }
       }
     }
   },
