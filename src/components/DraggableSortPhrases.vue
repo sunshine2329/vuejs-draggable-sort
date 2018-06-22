@@ -5,9 +5,7 @@
       <b-button v-on:click.prevent="onDone" style="float: right; width: auto;">Done</b-button>
     </div>
     <div id="scroll-container" class="d-flex">
-      <draggable v-model="sortedPhrases"
-        :options="options"
-        style="width: 100%">
+      <draggable v-model="sortedPhrases" :options="options" style="width: 100%">
         <transition-group>
             <div v-for="phrase in sortedPhrases" v-bind:key="`phrase-${phrase.index}`" class="d-flex">
               <div class="phrase-row phrase-row-number d-flex justify-content-center align-content-center">{{ phrase.index }}.</div>
