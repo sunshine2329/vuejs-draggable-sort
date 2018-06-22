@@ -72,7 +72,6 @@ export default {
   right: 0px;
   bottom: 0px;
   overflow-y: auto;
-  -webkit-overflow-scrolling: auto;
 }
 .sortable-chosen {
   opacity: 0.3 !important;
