@@ -4,7 +4,7 @@
       <b-button v-on:click.prevent="onBack" style="width: auto;">Back</b-button>
       <b-button v-on:click.prevent="onDone" style="float: right; width: auto;">Done</b-button>
     </div>
-    <div ref="scrollContainer" id="scroll-container" class="d-flex">
+    <div id="scroll-container" class="d-flex">
       <draggable id="draggable-container" v-model="sortedPhrases" :options="options" style="width: 100%">
         <transition-group>
             <div v-for="(phrase, index) in sortedPhrases" v-bind:key="`phrase-${index}`" class="d-flex">
@@ -86,6 +86,7 @@ export default {
   right: 0px;
   bottom: 0px;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .sortable-chosen {
   opacity: 0.3 !important;
