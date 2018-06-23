@@ -7,10 +7,10 @@
     <div ref="scrollContainer" id="scroll-container" class="d-flex">
       <draggable id="draggable-container" v-model="sortedPhrases" :options="options" style="width: 100%">
         <transition-group>
-            <div v-for="phrase in sortedPhrases" v-bind:key="`phrase-${phrase.index}`" class="d-flex">
-              <div class="phrase-row phrase-row-number d-flex justify-content-center align-content-center">{{ phrase.index }}.</div>
+            <div v-for="(phrase, index) in sortedPhrases" v-bind:key="`phrase-${index}`" class="d-flex">
+              <div class="phrase-row phrase-row-number d-flex justify-content-center align-content-center">{{ index + 1 }}.</div>
               <div class="phrase-row d-flex justify-content-center align-items-center">
-                <div style="flex: 1">{{ phrase.phrase }}</div>
+                <div style="flex: 1">{{ phrase }}</div>
                 <i class="handle"><v-icon name="move"></v-icon></i>
               </div>
             </div>
@@ -56,17 +56,18 @@ export default {
     }
   },
   mounted () {
-    for (var i = 0; i < this.phrases.length; i++) {
-      this.sortedPhrases.push({index: (i + 1), phrase: this.phrases[i]})
-    }
+    this.sortedPhrases = this.phrases.slice()
+    // for (var i = 0; i < this.phrases.length; i++) {
+    //   this.sortedPhrases.push({index: (i + 1), phrase: this.phrases[i]})
+    // }
   },
   methods: {
     onBack: function () {
       this.$emit('initialize')
     },
     onDone: function () {
-      var results = this.sortedPhrases.map(phrase => phrase.phrase)
-      this.$emit('onEnd', results)
+      // var results = this.sortedPhrases.map(phrase => phrase.phrase)
+      this.$emit('onEnd', this.sortedPhrases)
     }
   }
 }
@@ -94,6 +95,9 @@ export default {
 }
 .sortable-drag .phrase-row {
   background: #86735a;
+}
+.sortable-drag .phrase-row-number {
+  opacity: 0;
 }
 .phrase-row {
   background: #e7e7e7;
